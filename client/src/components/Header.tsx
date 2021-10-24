@@ -78,7 +78,7 @@ type HeaderProp = {
 
 const Header = ({ login, signup, modal, handleMessage, handleNotice }: HeaderProp) => {
   //   const isLogin = useSelector((state) => state.userReducer).token;
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const dispatch = useDispatch();
 
   const handleLogoutRequest = () => {

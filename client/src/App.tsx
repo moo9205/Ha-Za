@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-<<<<<<< HEAD
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -95,21 +94,6 @@ const App: React.FC = () => {
           ) : null}
         </div>
       </AppWrapper>
-=======
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Mypage from './pages/Mypage';
-
-const App: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/mypage" component={Mypage} />
-      </Switch>
->>>>>>> 1b44824a6b5014dc932917629e5f138b5342297e
     </BrowserRouter>
   );
 };
