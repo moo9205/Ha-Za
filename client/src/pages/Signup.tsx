@@ -42,6 +42,7 @@ export const SignUpButton = styled.button`
   }
 `;
 
+<<<<<<< HEAD
 type SignupProp = {
   handleModal: (a: boolean) => void;
   handleMessage: (a: string) => void;
@@ -49,6 +50,9 @@ type SignupProp = {
 };
 
 const Signup = ({ handleModal, handleMessage, handleNotice }: SignupProp) => {
+=======
+const Signup: React.FC = () => {
+>>>>>>> 1b44824a6b5014dc932917629e5f138b5342297e
   const [userInfo, setUserInfo] = useState({
     id: '',
     password: ''
@@ -121,10 +125,22 @@ const Signup = ({ handleModal, handleMessage, handleNotice }: SignupProp) => {
     }
   };
 
+<<<<<<< HEAD
   return (
     <Backdrop>
       <SignupView>
         <CloseButton onClick={handleModal} />
+=======
+  // JUST FOR TESTING
+  const handleClick = () => {
+    alert('닫기');
+  };
+
+  return (
+    <Backdrop>
+      <SignupView>
+        <CloseButton onClick={handleClick} />
+>>>>>>> 1b44824a6b5014dc932917629e5f138b5342297e
         <img className="logo" src={logo} alt="logo" />
         <SignUpInputContainer>
           <InputField onChange={inputCheck('id')} placeholder="아이디" />
