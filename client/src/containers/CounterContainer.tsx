@@ -1,11 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../modules';
 import { increase, decrease, increaseBy } from '../modules/counter';
 import Counter from '../components/Counter';
 
-function CounterContainer ({ match }: RouteComponentProps) {
+function CounterContainer() {
   // 상태를 조회합니다. 상태를 조회 할 때에는 state 의 타입을 RootState 로 지정해야합니다.
   const count = useSelector((state: RootState) => state.counter.count);
   const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
@@ -31,6 +30,6 @@ function CounterContainer ({ match }: RouteComponentProps) {
       onIncreaseBy={onIncreaseBy}
     />
   );
-};
+}
 
 export default CounterContainer;
