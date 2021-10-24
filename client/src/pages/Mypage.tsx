@@ -4,6 +4,13 @@ import styled from 'styled-components';
 import { Colors } from '../components/utils/_var';
 import { Alertbox, InputField } from '../components/UserComponents';
 
+export const MypageWrapper = styled.div`
+  .main {
+    display: flex;
+    min-height: calc(100vh - 170px);
+  }
+`;
+
 export const MypageView = styled.div`
   margin: auto;
   padding-top: 0.7rem;
@@ -51,8 +58,13 @@ export const MypageButton = styled.button`
     border: 2px solid ${Colors.darkGray};
   }
 `;
+type MypageProp = {
+  modal: () => void;
+  handleMessage: (a: string) => void;
+  handleNotice: (a: boolean) => void;
+};
 
-const Mypage: React.FC = () => {
+const Mypage = ({ modal, handleMessage, handleNotice }: MypageProp) => {
   const [checkPassword, setCheckPassword] = useState(true);
   const [checkRetypePassword, setCheckRetypePassword] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
@@ -106,20 +118,28 @@ const Mypage: React.FC = () => {
   };
 
   return (
-    <MypageView>
-      <MypageInputContainer>
-        <InputField disabled placeholder="아이디" />
-        <InputField type="password" onChange={inputCheck('password')} placeholder="비밀번호" />
-        <InputField type="password" onChange={handleCheckPassword} placeholder="비밀번호 재확인" />
-      </MypageInputContainer>
-      <MypageButton onClick={handleEditRequest} color={Colors.lightGreen}>
-        정보수정
-      </MypageButton>
-      <MypageButton onClick={handleWithdrawalRequest} color={Colors.darkGray}>
-        회원탈퇴
-      </MypageButton>
-      <Alertbox>{errorMsg}</Alertbox>
-    </MypageView>
+    <MypageWrapper>
+      <div className="main">
+        <MypageView>
+          <MypageInputContainer>
+            <InputField disabled placeholder="아이디" />
+            <InputField type="password" onChange={inputCheck('password')} placeholder="비밀번호" />
+            <InputField
+              type="password"
+              onChange={handleCheckPassword}
+              placeholder="비밀번호 재확인"
+            />
+          </MypageInputContainer>
+          <MypageButton onClick={handleEditRequest} color={Colors.lightGreen}>
+            정보수정
+          </MypageButton>
+          <MypageButton onClick={handleWithdrawalRequest} color={Colors.darkGray}>
+            회원탈퇴
+          </MypageButton>
+          <Alertbox>{errorMsg}</Alertbox>
+        </MypageView>
+      </div>
+    </MypageWrapper>
   );
 };
 
