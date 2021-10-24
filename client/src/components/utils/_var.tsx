@@ -6,9 +6,7 @@ const Colors = {
   lightGray: '#e0e2e3',
   lightGreen: '#c1d415',
   green: '#8cbf1c',
-  darkGreen: '#709b15',
-  pastelPurple: '#caa6fe',
-  purple: '#9c57ff'
+  darkGreen: '#709b15'
 };
 
 export { Colors };
