@@ -24,8 +24,8 @@ export const InputField = styled.input`
   background-color: #f2f2f2;
   border: none;
   border-radius: 15px;
-  width: 11.5rem;
-  height: 1.2rem;
+  width: 13.5rem;
+  height: 2.2rem;
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
   color: ${Colors.darkGray};

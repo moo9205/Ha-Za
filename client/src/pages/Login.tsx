@@ -54,7 +54,14 @@ export const SignupSpan = styled.span`
   }
 `;
 
-const Login: React.FC = () => {
+type LoginProp = {
+  signup: (a: boolean) => void;
+  handleModal: (a: boolean) => void;
+  handleMessage: (a: string) => void;
+  handleNotice: (a: boolean) => void;
+};
+
+const Login = ({ signup, handleModal, handleMessage, handleNotice }: LoginProp) => {
   const [loginInfo, setLoginInfo] = useState({
     id: '',
     password: ''
@@ -79,15 +86,10 @@ const Login: React.FC = () => {
     }
   };
 
-  // JUST FOR TESTING
-  const handleClick = () => {
-    alert('닫기');
-  };
-
   return (
     <Backdrop>
       <LoginView>
-        <CloseButton onClick={handleClick} />
+        <CloseButton onClick={handleModal} />
         <img className="logo" src={logo} alt="logo" />
         <LoginInputContainer>
           <InputField
