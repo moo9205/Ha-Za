@@ -1,43 +1,64 @@
 const LOG_IN = 'user/LOG_IN' as const;
 const LOG_OUT = 'user/LOG_OUT' as const;
+const TOKEN_EXPIRED = 'user/TOKEN_EXPIRED' as const;
 
-export const login = () => ({
-  type: LOG_IN
+export const userLogin = (token: string, userID: string) => ({
+  type: LOG_IN,
+  payload: {
+    token,
+    userID
+  }
 });
 
-export const logout = () => ({
+export const userLogout = () => ({
   type: LOG_OUT
 });
 
-type UserAction = ReturnType<typeof login> | ReturnType<typeof logout>;
+export const tokenExpired = (token: string, isExpired: boolean, userID: string) => ({
+  type: TOKEN_EXPIRED,
+  payload: {
+    token,
+    isExpired,
+    userID
+  }
+});
+
+type UserAction =
+  | ReturnType<typeof userLogin>
+  | ReturnType<typeof userLogout>
+  | ReturnType<typeof tokenExpired>;
 
 type UserState = {
   token: string;
-  userInfo: object;
+  isExpired: boolean;
+  userID: string;
 };
 
 const initialState: UserState = {
-  token: 'token',
-  userInfo: {
-    id: 'not logged in'
-  }
+  token: '',
+  isExpired: false,
+  userID: ''
 };
 
 function user(state: UserState = initialState, action: UserAction): UserState {
   switch (action.type) {
     case LOG_IN:
       return {
-        token: 'access token',
-        userInfo: {
-          id: 'logged in'
-        }
+        token: action.payload.token,
+        isExpired: false,
+        userID: action.payload.userID
       };
     case LOG_OUT:
       return {
         token: '',
-        userInfo: {
-          id: ''
-        }
+        isExpired: false,
+        userID: ''
+      };
+    case TOKEN_EXPIRED:
+      return {
+        token: action.payload.token,
+        isExpired: true,
+        userID: action.payload.userID
       };
     default:
       return state;
