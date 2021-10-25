@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './modules';
 import styled from 'styled-components';
+import { useJwt } from 'react-jwt';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Mainpage from './pages/Mainpage';
@@ -12,6 +13,7 @@ import Signup from './pages/Signup';
 import Mypage from './pages/Mypage';
 import Modal from './components/Modal';
 import Notification from './components/Notification';
+import { tokenExpired } from './modules/user';
 
 const AppWrapper = styled.div`
   * {
@@ -28,12 +30,22 @@ const AppWrapper = styled.div`
 `;
 
 const App: React.FC = () => {
+  const dispatch = useDispatch();
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState('');
   const [openNotice, setOpenNotice] = useState(false);
   const isLogin = useSelector((state: RootState) => state.user).token;
+  const token = isLogin
+  const userId = useSelector((state: RootState) => state.user).userID;
+  const { decodedToken, isExpired } = useJwt(token);
+
+  console.log(decodedToken, isExpired);
+  
+  if (decodedToken && isExpired) {
+    dispatch(tokenExpired(token, true, userId))
+  }
 
   const handleLoginModalOpen = () => {
     setOpenLogin(true);
