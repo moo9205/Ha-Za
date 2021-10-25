@@ -57,7 +57,7 @@ function user(state: UserState = initialState, action: UserAction): UserState {
     case TOKEN_EXPIRED:
       return {
         token: action.payload.token,
-        isExpired: true,
+        isExpired: action.payload.isExpired,
         userID: action.payload.userID
       };
     default:
