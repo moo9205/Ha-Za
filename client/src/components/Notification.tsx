@@ -120,7 +120,7 @@ const Notification = ({ message, handleNotice, handleMessage }: NotiProp) => {
         </CloseIcon>
         <Message
           topMargin={
-            message === '정말 탈퇴 하시겠습니까?' ||
+            message === '정말 탈퇴하시겠습니까?' ||
             message === '로그인 성공!' ||
             message === '로그아웃 성공!' ||
             message === '회원가입 성공!' ||
@@ -136,18 +136,18 @@ const Notification = ({ message, handleNotice, handleMessage }: NotiProp) => {
         message === '회원탈퇴가 완료되었습니다.' ? (
           <NoticeButton
             onClick={() => {
-              window.location.replace('/mainpage');
+              window.location.replace('/');
             }}>
             메인화면으로
           </NoticeButton>
         ) : message === '회원정보가 수정되었습니다.' ? (
           <NoticeClose
             onClick={() => {
-              window.location.replace('/myinfo');
+              window.location.replace('/mypage');
             }}>
             확인
           </NoticeClose>
-        ) : message === '정말 탈퇴 하시겠습니까?' ? (
+        ) : message === '정말 탈퇴하시겠습니까?' ? (
           <NoticeButton onClick={withdrawalRequest}>탈퇴하기</NoticeButton>
         ) : null}
       </NoticeView>
