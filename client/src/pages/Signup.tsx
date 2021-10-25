@@ -48,7 +48,7 @@ type SignupProp = {
   handleNotice: (a: boolean) => void;
 };
 
-const Signup = ({ handleModal, handleMessage, handleNotice }: SignupProp) => {
+function Signup({ handleModal, handleMessage, handleNotice }: SignupProp) {
   const [userInfo, setUserInfo] = useState({
     id: '',
     password: ''
@@ -140,6 +140,6 @@ const Signup = ({ handleModal, handleMessage, handleNotice }: SignupProp) => {
       </SignupView>
     </Backdrop>
   );
-};
+}
 
 export default Signup;

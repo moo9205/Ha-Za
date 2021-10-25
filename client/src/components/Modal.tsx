@@ -25,16 +25,17 @@ export const ModalView = styled.div`
   height: 9.5rem;
   padding-top: 1.2rem;
   box-shadow: 10px 10px grey;
-  .content {
-    margin: 0.6rem auto 0;
-    padding: auto 0.3rem;
-    font-size: 1rem;
-  }
+`;
+
+export const Content = styled.div`
+  margin: 0.6rem auto 0;
+  padding: auto 0.3rem;
+  font-size: 1rem;
 `;
 
 export const LogOutButton = styled.button`
   margin-top: 0.5rem;
-  background-color: ${Colors.mediumGray};
+  background-color: ${Colors.gray};
   border: none;
   border-radius: 10px;
   width: 7rem;
@@ -53,7 +54,7 @@ type ModalProp = {
   handleModal: () => void;
 };
 
-const Modal = ({ handleModal, login }: ModalProp) => {
+function Modal({ handleModal, login }: ModalProp) {
   const goLogin = () => {
     handleModal();
     login();
@@ -62,13 +63,13 @@ const Modal = ({ handleModal, login }: ModalProp) => {
   const logout = () => {
     localStorage.clear();
     handleModal();
-    window.location.replace('/mainpage');
+    window.location.replace('/');
   };
 
   return (
     <ModalBackdrop>
       <ModalView>
-        <div className="content">[토큰 만료] 다시 로그인 하시겠습니까?</div>
+        <Content>[토큰 만료] 다시 로그인 하시겠습니까?</Content>
         <NoticeButton onClick={goLogin}>로그인</NoticeButton>
         <div>
           <LogOutButton onClick={logout}>로그아웃</LogOutButton>
@@ -76,6 +77,6 @@ const Modal = ({ handleModal, login }: ModalProp) => {
       </ModalView>
     </ModalBackdrop>
   );
-};
+}
 
 export default Modal;

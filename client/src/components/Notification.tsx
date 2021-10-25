@@ -85,10 +85,15 @@ type NotiProp = {
   handleNotice: (a: boolean) => void;
 };
 
-const Notification = ({ message, handleNotice, handleMessage }: NotiProp) => {
+function Notification({ message, handleNotice, handleMessage }: NotiProp) {
   const token = useSelector((state: RootState) => state.user).token;
 
   const withdrawalRequest = () => {
+    handleNotice(true);
+    handleMessage('회원탈퇴가 완료되었습니다.');
+    localStorage.clear();
+
+    /*
     axios
       .delete(process.env.REACT_APP_API_URL + '/withdrawal', {
         headers: {
@@ -104,6 +109,7 @@ const Notification = ({ message, handleNotice, handleMessage }: NotiProp) => {
           localStorage.clear();
         }
       });
+      */
   };
 
   return (
@@ -140,7 +146,7 @@ const Notification = ({ message, handleNotice, handleMessage }: NotiProp) => {
             }}>
             메인화면으로
           </NoticeButton>
-        ) : message === '회원정보가 수정되었습니다.' ? (
+        ) : message === '비밀번호가 수정되었습니다.' ? (
           <NoticeClose
             onClick={() => {
               window.location.replace('/mypage');
@@ -153,6 +159,6 @@ const Notification = ({ message, handleNotice, handleMessage }: NotiProp) => {
       </NoticeView>
     </NoticeBackdrop>
   );
-};
+}
 
 export default Notification;

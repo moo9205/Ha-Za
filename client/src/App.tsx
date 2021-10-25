@@ -29,7 +29,7 @@ const AppWrapper = styled.div`
   }
 `;
 
-const App: React.FC = () => {
+function App() {
   const dispatch = useDispatch();
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
@@ -37,14 +37,14 @@ const App: React.FC = () => {
   const [message, setMessage] = useState('');
   const [openNotice, setOpenNotice] = useState(false);
   const isLogin = useSelector((state: RootState) => state.user).token;
-  const token = isLogin
+  const token = isLogin;
   const userId = useSelector((state: RootState) => state.user).userID;
   const { decodedToken, isExpired } = useJwt(token);
 
-  console.log(decodedToken, isExpired);
-  
+  // console.log(decodedToken, isExpired);
+
   if (decodedToken && isExpired) {
-    dispatch(tokenExpired(token, true, userId))
+    dispatch(tokenExpired(token, true, userId));
   }
 
   const handleLoginModalOpen = () => {
@@ -59,19 +59,15 @@ const App: React.FC = () => {
   const handleSignupModalClose = () => {
     setOpenSignup(false);
   };
-
   const handleModalOpen = () => {
     setOpenModal(true);
   };
-
   const handleModalClose = () => {
     setOpenModal(false);
   };
-
   const handleMessage = (msg: string) => {
     setMessage(msg);
   };
-
   const handleNotice = (boolean: boolean) => {
     setOpenNotice(boolean);
   };
@@ -130,6 +126,6 @@ const App: React.FC = () => {
       </AppWrapper>
     </BrowserRouter>
   );
-};
+}
 
 export default App;

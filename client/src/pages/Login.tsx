@@ -64,7 +64,7 @@ type LoginProp = {
   handleNotice: (a: boolean) => void;
 };
 
-const Login = ({ signup, handleModal, handleMessage, handleNotice }: LoginProp) => {
+function Login({ signup, handleModal, handleMessage, handleNotice }: LoginProp) {
   const dispatch = useDispatch();
   const [loginInfo, setLoginInfo] = useState({
     id: '',
@@ -88,12 +88,10 @@ const Login = ({ signup, handleModal, handleMessage, handleNotice }: LoginProp) 
     } else {
       // JUST FOR TESTING PURPOSES
       dispatch(userLogin('access token', loginInfo.id));
-      localStorage.setItem('accessTokenTime', String(new Date().getTime()));
-      localStorage.setItem('userId', loginInfo.id);
       handleModal();
       handleNotice(true);
       handleMessage('로그인 성공!');
-      
+
       /*
       axios
         .post(`${process.env.REACT_APP_API_URL}/login`, loginInfo, {
@@ -165,6 +163,6 @@ const Login = ({ signup, handleModal, handleMessage, handleNotice }: LoginProp) 
       </LoginView>
     </Backdrop>
   );
-};
+}
 
 export default Login;
