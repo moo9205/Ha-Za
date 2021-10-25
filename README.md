@@ -47,11 +47,11 @@
 # Architecture
 **Client-Side**
 
-<img width="625" alt="flowchart" src="https://user-images.githubusercontent.com/29108753/138558448-4d757fe7-3e1a-4c5e-8a5a-05e0a143addf.png">
+<img width="625" alt="flowchart" src="https://user-images.githubusercontent.com/29108753/138636813-7fb37550-12f3-4c82-a4d7-49c968c7836c.png">
 
 **Server-Side**
 
-<img width="700" alt="system-architecture" src="https://user-images.githubusercontent.com/29108753/138558450-a43550c4-9c94-49a2-b0ee-7495eabc87ce.png">
+<img width="700" alt="system-architecture" src="https://user-images.githubusercontent.com/29108753/138636517-f3001164-47be-498d-b4e9-d01f911a2195.png">
 
 
 # Need More Information?
