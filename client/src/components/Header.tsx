@@ -8,9 +8,6 @@ import { Colors } from '../components/utils/_var';
 import logo from '../images/logo.png';
 
 const HeaderWrapper = styled.div`
-  button:focus {
-    outline: none;
-  }
   .header {
     display: grid;
     height: 3.5rem;
@@ -26,44 +23,33 @@ const HeaderWrapper = styled.div`
     text-align: left;
     padding-left: 1rem;
     max-width: 8rem;
-    /* background-color: lightsteelblue; */
   }
   .header-container-2 {
     grid-area: pages;
     justify-self: end;
     padding-right: 1rem;
     margin-top: 0rem;
-    /* background-color: lavenderblush; */
-  }
-  a {
-    text-decoration: none;
-  }
-  .logo {
-    font-size: 1.2rem;
   }
   .logo-image {
     padding-top: 0.1rem;
     width: 5.75rem;
   }
-  .btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  .login,
-  .logout,
-  .signup,
-  .mypage {
-    font-size: 0.85rem;
-    font-family: 'Noto Sans KR', sans-serif;
-    padding-left: 0.5rem;
-    color: ${Colors.gray};
-  }
-  button:hover {
+`;
+
+export const HeaderButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  padding-left: 0.5rem;
+  color: ${Colors.gray};
+
+  &:hover {
     color: ${Colors.green};
   }
-  .display-none {
-    display: none;
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -75,16 +61,15 @@ type HeaderProp = {
   handleNotice: (a: boolean) => void;
 };
 
-const Header = ({ login, signup, modal, handleMessage, handleNotice }: HeaderProp) => {
+function Header({ login, signup, modal, handleMessage, handleNotice }: HeaderProp) {
+  const dispatch = useDispatch();
   const isLogin = useSelector((state: RootState) => state.user).token;
   const isExpired = useSelector((state: RootState) => state.user).isExpired;
-  console.log(isLogin);
-  const dispatch = useDispatch();
 
   const handleLogoutRequest = () => {
     const token = isLogin;
 
-    if (isExpired) {
+    if (!isExpired) {
       modal();
     } else {
       // JUST FOR TESTING PURPOSES
@@ -120,34 +105,26 @@ const Header = ({ login, signup, modal, handleMessage, handleNotice }: HeaderPro
       <div className="header">
         <div className="header-container-1">
           <Link to="/">
-            <div className="logo">
-              <img src={logo} className="logo-image" alt="logo_img" />
-            </div>
+            <img src={logo} className="logo-image" alt="logo_img" />
           </Link>
         </div>
         <div className="header-container-2">
           {!isLogin ? (
-            <button className="btn login" onClick={login}>
-              로그인
-            </button>
+            <HeaderButton onClick={login}>로그인</HeaderButton>
           ) : (
-            <button className="btn logout" onClick={handleLogoutRequest}>
-              로그아웃
-            </button>
+            <HeaderButton onClick={handleLogoutRequest}>로그아웃</HeaderButton>
           )}
           {!isLogin ? (
-            <button className="btn signup" onClick={signup}>
-              회원가입
-            </button>
+            <HeaderButton onClick={signup}>회원가입</HeaderButton>
           ) : (
             <Link to="/mypage">
-              <button className="btn mypage">마이페이지</button>
+              <HeaderButton>마이페이지</HeaderButton>
             </Link>
           )}
         </div>
       </div>
     </HeaderWrapper>
   );
-};
+}
 
 export default Header;
