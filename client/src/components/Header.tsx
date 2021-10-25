@@ -69,7 +69,7 @@ function Header({ login, signup, modal, handleMessage, handleNotice }: HeaderPro
   const handleLogoutRequest = () => {
     const token = isLogin;
 
-    if (!isExpired) {
+    if (isExpired) {
       modal();
     } else {
       // JUST FOR TESTING PURPOSES

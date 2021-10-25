@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import logo from '../images/logo.png';
 import { Colors } from '../components/utils/_var';
 import { Alertbox, Backdrop, InputField } from '../components/UserComponents';
@@ -43,7 +44,7 @@ export const SignUpButton = styled.button`
 `;
 
 type SignupProp = {
-  handleModal: (a: boolean) => void;
+  handleModal: () => void;
   handleMessage: (a: string) => void;
   handleNotice: (a: boolean) => void;
 };
@@ -55,8 +56,8 @@ function Signup({ handleModal, handleMessage, handleNotice }: SignupProp) {
   });
 
   const [checkId, setCheckId] = useState('');
-  const [checkPassword, setCheckPassword] = useState(true);
-  const [checkRetypePassword, setCheckRetypePassword] = useState(true);
+  const [checkPassword, setCheckPassword] = useState(false);
+  const [checkRetypePassword, setCheckRetypePassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
   const handleInputValue = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,7 +118,29 @@ function Signup({ handleModal, handleMessage, handleNotice }: SignupProp) {
     } else if (checkRetypePassword !== true) {
       setErrorMsg('비밀번호가 일치하지 않습니다');
     } else {
-      setErrorMsg('');
+      handleModal();
+      handleNotice(true);
+      handleMessage('회원가입 성공!');
+
+      /*
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/signup`, userInfo, {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true
+        })
+        .then((res) => {
+          if (res.status === 201) {
+            handleModal();
+            handleNotice(true);
+            handleMessage('회원가입 성공!');
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 409') {
+            setErrorMsg('이미 가입된 아이디입니다');
+          }
+        });
+      */
     }
   };
 
