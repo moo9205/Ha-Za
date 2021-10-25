@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
-import { logout } from '../modules/user';
+import { userLogout } from '../modules/user';
 import axios from 'axios';
 import { Colors } from '../components/utils/_var';
 import logo from '../images/logo.png';
-// axios.defaults.headers.withCredentials = true;
 
 const HeaderWrapper = styled.div`
   button:focus {
@@ -78,22 +77,23 @@ type HeaderProp = {
 
 const Header = ({ login, signup, modal, handleMessage, handleNotice }: HeaderProp) => {
   const isLogin = useSelector((state: RootState) => state.user).token;
+  const isExpired = useSelector((state: RootState) => state.user).isExpired;
   console.log(isLogin);
   const dispatch = useDispatch();
 
   const handleLogoutRequest = () => {
-    const token = localStorage.getItem('accessToken');
-    const accessTokenTime = localStorage.getItem('accessTokenTime');
-    const expiredTime = Number(process.env.REACT_APP_TOKEN_TIME);
+    const token = isLogin;
 
-    // if (Number(accessTokenTime) + expiredTime - new Date().getTime() < 0) {
-    if (isLogin === '') {
+    if (isExpired) {
       modal();
     } else {
-      dispatch(logout());
+      // JUST FOR TESTING PURPOSES
+      dispatch(userLogout());
       localStorage.clear();
       handleNotice(true);
       handleMessage('로그아웃 성공!');
+
+      /*
       axios
         .post(process.env.REACT_APP_API_URL + '/logout', {
           headers: {
@@ -103,14 +103,15 @@ const Header = ({ login, signup, modal, handleMessage, handleNotice }: HeaderPro
           withCredentials: true
         })
         .then(() => {
-          dispatch(logout());
+          dispatch(userLogout());
           localStorage.clear();
           handleNotice(true);
           handleMessage('로그아웃 성공!');
         })
         .catch((error) => {
-          console.log(error.response);
+          console.log(error.response.data.message);
         });
+      */
     }
   };
 

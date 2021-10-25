@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../modules';
 import styled from 'styled-components';
+import axios from 'axios';
 import { Colors } from '../components/utils/_var';
 import { Alertbox, InputField } from '../components/UserComponents';
 
@@ -65,6 +68,7 @@ type MypageProp = {
 };
 
 const Mypage = ({ modal, handleMessage, handleNotice }: MypageProp) => {
+  const token = useSelector((state: RootState) => state.user).token;
   const [checkPassword, setCheckPassword] = useState(true);
   const [checkRetypePassword, setCheckRetypePassword] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
@@ -109,12 +113,36 @@ const Mypage = ({ modal, handleMessage, handleNotice }: MypageProp) => {
     } else if (checkRetypePassword !== true) {
       setErrorMsg('비밀번호가 일치하지 않습니다');
     } else {
+      // JUST FOR TESTING PURPOSES
       setErrorMsg('');
+      handleNotice(true);
+      handleMessage('회원정보가 수정되었습니다.');
+
+      /*
+      axios
+        .patch(process.env.REACT_APP_API_URL + '/user-info', userInfo, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            handleNotice(true);
+            handleMessage('회원정보가 수정되었습니다.');
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+        });
+      */
     }
   };
 
   const handleWithdrawalRequest = () => {
-    alert('회원탈퇴');
+    handleNotice(true);
+    handleMessage('정말 탈퇴하시겠습니까?');
   };
 
   return (
