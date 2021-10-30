@@ -24,10 +24,11 @@
 
 ## BACK
 
-![](https://img.shields.io/badge/BACK-GraphQL-E10098?style=for-the-badge&logo=GraphQL)   
-![](https://img.shields.io/badge/BACK-Apollo-311C87?style=for-the-badge&logo=Apollo%20GraphQL)   
+![](https://img.shields.io/badge/BACK-Node.js-6DA55F?style=for-the-badge&logo=node.js)  
+![](https://img.shields.io/badge/BACK-Express.js-%23404d59.svg?style=for-the-badge&logo=express)  
 ![](https://img.shields.io/badge/BACK-MySQL-4479A1?style=for-the-badge&logo=mysql)  
-![](https://img.shields.io/badge/BACK-Prisma-1B222D?style=for-the-badge&logo=prisma)  
+![](https://img.shields.io/badge/BACK-Sequelize-258FFA?style=for-the-badge&logo=sequelize)    
+![](https://img.shields.io/badge/BACK-JWT-000000?style=for-the-badge&logo=json-web-tokens) 
 
 
 ## DEPLOYMENT
@@ -35,11 +36,12 @@
 
 ## Detailed chart
 | Fields                              | Stacks                     |
-| --------------------------------------- | ---------------------------- |
-| **Common**   | TypeScript, Git, GitHub, VS code |
-| [**Front-end**](https://github.com/Ha-Za/Ha-Za/tree/master/client)    | React, Redux, HTML5, CSS3, styled-components |
-| [**Back-end**](https://github.com/Ha-Za/Ha-Za/tree/master/server) | GraphQL, Apollo |
-| **Data**   | MySQL, Prisma |
+| ----------------------------------- | -------------------------- |
+| **Common** | TypeScript, Git, GitHub, VS code |
+| [**Front-end**](https://github.com/Ha-Za/Ha-Za/tree/master/client) | React, Redux, HTML5, CSS3, styled-components |
+| [**Back-end**](https://github.com/Ha-Za/Ha-Za/tree/master/server) | Node.js, Express |
+| **Data**   | MySQL, Sequelize |
+| **Auth**   | JSON Web Token (JWT) |
 | **Deployment**   | AWS, EC2, S3, RDS |
 | **Planning / Design**   | dbdiagram.io, GitBook, Figma, Photoshop, Illustrator |
 | **Communication**   | Zoom, Discord |
