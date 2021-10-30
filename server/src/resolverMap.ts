@@ -1,8 +1,18 @@
 import { IResolvers } from '@graphql-tools/utils';
 const resolverMap: IResolvers = {
   Query: {
-    helloWorld(_: void, args: void): string {
-      return `Hello GraphQL~!`;
+    users: (parent, args, context, info) => {
+      console.log('🔥', parent, args, context, info);
+      return ``;
+    },
+    todos: (parent, args, context, info) => {
+      return;
+    }
+  },
+  Mutation: {
+    deleteuser: (parent, args, context, info) => {
+      const deleted = ``;
+      return deleted;
     }
   }
 };

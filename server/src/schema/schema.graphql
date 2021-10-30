@@ -1,3 +1,19 @@
 type Query {
-  helloWorld: String!
+  users: user
+  todos: [todo]
+}
+type Mutation {
+  deleteuser(userId: String): user
+}
+type user {
+  id: String
+  userId: String
+  password: String
+  salt: String
+}
+type todo {
+  id: String
+  userId: String
+  type: String
+  content: String
 }
