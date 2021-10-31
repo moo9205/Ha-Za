@@ -15,11 +15,18 @@ app.use(
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS']
   })
-); // 이거 왜 있는거지? 언제 사용되는걸까?
+);
 
-// app.get('/', (req, res) => {
-//   res.send('hello world');
-// });
+app.post('/login', controllers.login);
+app.post('/signup', controllers.signup);
+app.post('/logout', controllers.logout);
+app.get('/user-info', controllers.userinfo);
+app.patch('/user-info', controllers.edituserinfo);
+app.delete('/withdrawal', controllers.withdrawal);
+// app.get('todo', controllers.todo);
+// app.post('todo', controllers.todo);
+// app.patch('todo', controllers.todo);
+// app.delete('todo', controllers.todo);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 // if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {

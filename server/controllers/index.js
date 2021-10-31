@@ -3,6 +3,7 @@ module.exports = {
   signup: require('./user/signup'),
   logout: require('./user/logout'),
   userinfo: require('./mypage/user-info'),
+  edituserinfo: require('./mypage/edit-user-info'),
   withdrawal: require('./mypage/withdrawal'),
-  todo: require('./mainpage/todo')
+  // todo: require('./mainpage/todo')
 };

@@ -6,7 +6,11 @@ const development = {
   database: process.env.DATABASE_NAME,
   host: process.env.DATABASE_HOST,
   port: process.env.DATABASE_PORT,
-  dialect: 'mysql'
+  dialect: 'mysql',
+  // dialectOptions: {
+  //   useUTC: false,
+  // },
+  // timezone: 'Asia/Seoul'
 };
 
 const production = {
@@ -15,7 +19,7 @@ const production = {
   database: process.env.DATABASE_NAME,
   host: process.env.DATABASE_HOST,
   port: process.env.DATABASE_PORT,
-  dialect: 'mysql'
+  dialect: 'mysql',
 };
 
 const test = {
@@ -24,7 +28,7 @@ const test = {
   database: process.env.DATABASE_NAME,
   host: process.env.DATABASE_HOST,
   port: process.env.DATABASE_PORT,
-  dialect: 'mysql'
+  dialect: 'mysql',
 };
 
 module.exports = { development, production, test };
