@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     } else {
       const userInfo = await users.findOne({ where: { id: accessTokenData.id } });
       if (userInfo) {
-        await user.destroy({ where: { id: accessTokenData.id } });
+        await users.destroy({ where: { id: accessTokenData.id } });
         res.setHeader('authorization', '');
         // 회원탈퇴를 성공한 경우 📌 200
         res.status(200).json({ message: 'Successfully withdrawal' });

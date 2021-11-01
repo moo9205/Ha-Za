@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon  --experimental-modules index.js",
+    "start": "nodemon index.js",
     "pm2:start": "pm2 start src/index.ts",
     "pm2:stop": "pm2 stop src/index.ts",
     "sq:migrate": "npx sequelize-cli db:migrate"
@@ -26,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.2",
     "sequelize": "^6.8.0",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "sequelize-values": "^1.1.0"
   }
 }

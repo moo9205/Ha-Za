@@ -2,6 +2,7 @@ const { users } = require('../../models');
 const { isAuthorized } = require('../tokenFunctions');
 const crypto = require('crypto');
 const Sequelize = require('sequelize');
+require('sequelize-values')(Sequelize);
 
 module.exports = async (req, res) => {
   try {
