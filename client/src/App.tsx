@@ -83,7 +83,7 @@ function App() {
             handleMessage={handleMessage}
             handleNotice={handleNotice}
           />
-          <div className="space" />
+
           {openModal ? <Modal handleModal={handleModalClose} login={handleLoginModalOpen} /> : null}
           <Switch>
             <Route exact path="/" component={Mainpage} />
