@@ -6,8 +6,7 @@ import dummyTodo from '../dummydata';
 export const MainpageWrapper = styled.div`
   .main {
     display: flex;
-    min-height: calc(100vh - 130px);
-    border: 1px solid black;
+    min-height: calc(100vh - 137px);
     justify-content: center;
     align-items: center;
     flex-direction: column;
