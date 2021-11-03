@@ -10,7 +10,7 @@ import { Alertbox, InputField } from '../components/UserComponents';
 export const MypageWrapper = styled.div`
   .main {
     display: flex;
-    min-height: calc(100vh - 183px);
+    min-height: calc(100vh - 137px);
   }
 `;
 
