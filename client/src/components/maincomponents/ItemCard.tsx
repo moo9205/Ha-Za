@@ -1,9 +1,10 @@
 // import { useEffect } from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Colors } from '../utils/_var';
 
 const Card = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 100%;
   height: 20%;
   display: flex;
@@ -16,6 +17,9 @@ const Card = styled.div`
   cursor: grab;
   cursor: -moz-grab;
   cursor: -webkit-grab;
+  /* modified values */
+  border: 1px solid ${Colors.mediumGray};
+  color: ${Colors.mediumGray};
   :active {
     cursor: grabbing;
   }

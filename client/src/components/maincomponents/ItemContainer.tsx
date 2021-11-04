@@ -1,17 +1,26 @@
 import styled from 'styled-components';
 import ItemCard from './ItemCard';
+import { Colors } from '../utils/_var';
 
 const IC = styled.div`
   border: 1px solid black;
-  width: 25rem;
+  /* width: 25rem; */
   padding: 10px 20px 15px 20px;
-  height: 42rem;
+  /* height: 42rem; */
   overflow: auto;
+  /* modified values */
+  width: 100%;
+  height: 70vh; 
+  margin: auto 1rem;
+  border: 1px solid ${Colors.mediumGray};
+  color: ${Colors.mediumGray};
 `;
 
 const State = styled.div`
   font-weight: bold;
-  font-size: 30px;
+  /* font-size: 30px; */
+  /* modified values */
+  font-size: 1.7rem;
 `;
 
 type ItemContainerProps = {
