@@ -23,10 +23,10 @@ app.post('/logout', controllers.logout);
 app.get('/user-info', controllers.userinfo);
 app.patch('/user-info', controllers.edituserinfo);
 app.delete('/withdrawal', controllers.withdrawal);
-// app.get('todo', controllers.todo);
-// app.post('todo', controllers.todo);
-// app.patch('todo', controllers.todo);
-// app.delete('todo', controllers.todo);
+app.get('todo', controllers.getTodo);
+app.post('todo', controllers.makeTodo);
+// app.patch('todo', controllers.editTodo);
+// app.delete('todo', controllers.deleteTodo);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 // if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
@@ -37,7 +37,9 @@ const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 //   server = https.createServer(credentials, app);
 //   server.listen(HTTPS_PORT, () => console.log(`https server running on port ${HTTPS_PORT}`));
 // } else {
-const server = app.listen(HTTPS_PORT, () => console.log(`🚀 http server running on port ${HTTPS_PORT}`));
+const server = app.listen(HTTPS_PORT, () =>
+  console.log(`🚀 http server running on port ${HTTPS_PORT}`)
+);
 // }
 
 module.exports = server;
