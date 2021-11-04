@@ -14,16 +14,23 @@ export const MainpageWrapper = styled.div`
 `;
 const MainContainer = styled.div`
   display: flex;
-  width: 90rem;
+  /* width: 90rem; */
   justify-content: space-between;
   // border: 1px solid black;
   position: sticky;
+  /* modified values */
+  width: 100vw;
+  padding: 1rem;
+  padding-top: 0;
 `;
 
 const MakeContainer = styled.div`
   // border: 1px solid black;
-  width: 75.1%;
+  /* width: 75.1%; */
   margin-bottom: 10px;
+  /* modified values */
+  width: 100vw;
+  margin-left: 4rem;
 `;
 
 const Mainpage = (): JSX.Element => {

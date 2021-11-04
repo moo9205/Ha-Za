@@ -13,6 +13,7 @@ const NoticeWrapper = styled.div<InnerScreen>`
   width: 100vw;
   height: 100vh;
   background-color: ${Colors.black};
+  z-index: 999;
   .container {
     position: relative;
     width: 100vw;
