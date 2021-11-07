@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const { users } = require('../../models');
-const { isAuthorized, generateAccessToken, generateRefreshToken } = require('../tokenFunctions');
+const { isAuthorized } = require('../tokenFunctions');
 
 module.exports = async (req, res) => {
   try {
@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
 
     const accessTokenData = isAuthorized(req);
     // 토큰정보가 있어 중복 유저인 경우 📌 406
-    if (accessTokenData) return res.status(406).json({ message: 'you are already a user' });
+    if (e) return res.status(406).json({ message: 'you are already a user' });
 
     // 회원가입 양식을 다 채우지 않은 경우 📌 422
     if (!userId || !password) return res.status(422).json({ message: 'insufficient parameters supplied' });
