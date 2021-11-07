@@ -5,5 +5,8 @@ module.exports = {
   userinfo: require('./mypage/user-info'),
   edituserinfo: require('./mypage/edit-user-info'),
   withdrawal: require('./mypage/withdrawal'),
-  // todo: require('./mainpage/todo')
+  getTodo: require('./mainpage/getTodo'),
+  makeTodo: require('./mainpage/makeTodo'),
+  editTodo: require('./mainpage/editTodo'),
+  deleteTodo: require('./mainpage/deleteTodo')
 };
