@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ItemCard from '../components/maincomponents/ItemCard';
 import ItemContainer from '../components/maincomponents/ItemContainer';
 import dummyTodo from '../dummydata';
+import { Colors } from '../components/utils/_var';
 
 export const MainpageWrapper = styled.div`
   .main {

@@ -19,8 +19,12 @@ const Card = styled.div`
   cursor: -moz-grab;
   cursor: -webkit-grab;
   /* modified values */
-  border: 1px solid ${Colors.mediumGray};
+  border: 1px solid ${Colors.darkGray};
+  border-radius: 5px;
   color: ${Colors.mediumGray};
+  color: ${Colors.green};
+  font-weight: bold;
+  background-color: ${Colors.black};
   :active {
     cursor: grabbing;
   }
@@ -40,7 +44,15 @@ const ButtonContainer = styled.div`
   text-align: right;
 `;
 
-const Button = styled.button``;
+const Button = styled.button`
+  background-color: ${Colors.mediumGray};
+  border-radius: 5px;
+  margin-left: .2rem;
+  border: 0;
+  &:hover {
+    background-color: ${Colors.green};
+  }
+`;
 
 const Space = styled.span`
   // border: 1px solid black;
