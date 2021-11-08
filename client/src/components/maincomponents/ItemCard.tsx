@@ -1,4 +1,5 @@
 // import { useEffect } from 'react';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../utils/_var';
@@ -44,7 +45,7 @@ const Button = styled.button``;
 const Space = styled.span`
   // border: 1px solid black;
   width: 100%;
-  // visibility: hidden;
+  visibility: hidden;
 `;
 
 type ItemCardProps = {
@@ -55,39 +56,63 @@ type ItemCardProps = {
 };
 
 function ItemCard({ id, content, type, changeContent }: ItemCardProps) {
+  const token = localStorage.getItem('accessToken');
   const deleteItem = () => {
     console.log(id);
+    if (token) {
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/todo`, {
+          headers: {
+            authorization: `Bearer ${token}`
+          },
+          data: {
+            id: id
+          }
+        })
+        .then(() => {
+          window.location.replace('/');
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    } else {
+      sessionStorage.removeItem(`${id}`);
+    }
   };
 
   const [isEdit, setIsEdit] = useState(false);
-  const [text, setText] = useState(content);
-  const [changeType, setChangeType] = useState(type);
-  useEffect(() => {
-    console.log('text:', text);
-    console.log('content:', content);
-  }, [text]);
-
+  // const [text, setText] = useState(content);
+  const [currentType, setCurrentType] = useState(type);
+  // useEffect(() => {
+  //   // console.log('text:', text);
+  //   console.log('content:', content);
+  // }, [content]);
+  const changeType = () => {
+    console.log(currentType);
+  };
+  console.log(currentType);
   return (
     <Card>
       <span>
         <Space>{id} </Space>
         <select
           onChange={(e) => {
-            setChangeType(e.target.value);
-          }}>
-          <option value="" selected disabled hidden>
-            {changeType}
-          </option>
-          <option>ToDo</option>
-          <option>Doing</option>
-          <option>Done</option>
+            setCurrentType(e.target.value);
+          }}
+          value={currentType}>
+          {/* <option value="" selected disabled hidden>
+            {type}
+          </option> */}
+          <option onClick={changeType}>ToDo</option>
+          <option onClick={changeType}>Doing</option>
+          <option onClick={changeType}>Done</option>
         </select>
       </span>
       {isEdit ? (
         <input
-          placeholder={text}
+          placeholder={content}
           onChange={(e) => {
-            setText(e.target.value);
+            // setText(e.target.value);
             changeContent(id, e.target.value);
           }}
         />
