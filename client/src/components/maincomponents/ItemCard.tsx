@@ -47,7 +47,7 @@ const ButtonContainer = styled.div`
 const Button = styled.button`
   background-color: ${Colors.mediumGray};
   border-radius: 5px;
-  margin-left: .2rem;
+  margin-left: 0.2rem;
   border: 0;
   &:hover {
     background-color: ${Colors.green};
@@ -64,10 +64,10 @@ type ItemCardProps = {
   id: number;
   content: string;
   type: string;
-  changeContent: (id: number, content: string) => void;
+  itemList: { id: number; type: string; content: string }[];
 };
 
-function ItemCard({ id, content, type, changeContent }: ItemCardProps) {
+function ItemCard({ id, content, type, itemList }: ItemCardProps) {
   const token = localStorage.getItem('accessToken');
   const deleteItem = () => {
     console.log(id);
@@ -100,46 +100,57 @@ function ItemCard({ id, content, type, changeContent }: ItemCardProps) {
   };
 
   const [isEdit, setIsEdit] = useState(false);
-  const [text, setText] = useState(content);
-  const [currentType, setCurrentType] = useState(type);
-  // useEffect(() => {
-  //   // console.log('text:', text);
-  //   console.log('content:', content);
-  // }, [content]);
+  const [item, setItem] = useState({
+    id: id,
+    type: type,
+    content: content
+  });
+  const handleEditInput =
+    (key: string) =>
+    (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
+      setItem({ ...item, [key]: e.target.value });
+    };
+
   const editItem = () => {
     if (token) {
+      // Login Mode
+      axios
+        .patch(`${process.env.REACT_APP_API_URL}/todo`, item, {
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+          withCredentials: true
+        })
+        .then((res) => {
+          console.log(res);
+          window.location.replace('/');
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
     } else {
+      // Guest Mode
       const list = JSON.parse(sessionStorage['list']);
       const editTodo = list.filter((el: { id: number; content: string; type: string }) => {
         return el.id === id;
       })[0];
-      editTodo.content = text;
+      editTodo.type = item.type;
+      editTodo.content = item.content;
       sessionStorage.setItem('list', JSON.stringify(list));
       window.location.replace('/');
     }
   };
-  console.log('????', currentType);
+
   return (
     <Card>
       <span>
-        <Space>{id} </Space>
-        <select
-          onChange={(e) => {
-            setCurrentType(e.target.value);
-          }}
-          value={currentType}>
+        <Space>{id}</Space>
+        <select onChange={handleEditInput('type')} value={item.type}>
           <option>ToDo</option>
           <option>Doing</option>
           <option>Done</option>
         </select>
       </span>
       {isEdit ? (
-        <input
-          placeholder={content}
-          onChange={(e) => {
-            setText(e.target.value);
-          }}
-        />
+        <input placeholder={content} onChange={handleEditInput('content')} />
       ) : (
         <Content>{content}</Content>
       )}
