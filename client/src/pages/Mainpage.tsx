@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ItemContainer from '../components/maincomponents/ItemContainer';
 import dummyTodo from '../dummydata';
+import { Colors } from '../components/utils/_var';
 
 export const MainpageWrapper = styled.div`
   .main {
