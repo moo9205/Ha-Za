@@ -76,21 +76,37 @@ function ItemCard({ id, content, type, changeContent }: ItemCardProps) {
           console.log(error.response);
         });
     } else {
-      sessionStorage.removeItem(`${id}`);
+      const deletedList = JSON.parse(sessionStorage['list']).filter(
+        (el: { id: number; content: string; type: string }) => {
+          return el.id !== id;
+        }
+      );
+      console.log(deletedList);
+      sessionStorage.setItem('list', JSON.stringify(deletedList));
+      window.location.replace('/');
     }
   };
 
   const [isEdit, setIsEdit] = useState(false);
-  // const [text, setText] = useState(content);
+  const [text, setText] = useState(content);
   const [currentType, setCurrentType] = useState(type);
   // useEffect(() => {
   //   // console.log('text:', text);
   //   console.log('content:', content);
   // }, [content]);
-  const changeType = () => {
-    console.log(currentType);
+  const editItem = () => {
+    if (token) {
+    } else {
+      const list = JSON.parse(sessionStorage['list']);
+      const editTodo = list.filter((el: { id: number; content: string; type: string }) => {
+        return el.id === id;
+      })[0];
+      editTodo.content = text;
+      sessionStorage.setItem('list', JSON.stringify(list));
+      window.location.replace('/');
+    }
   };
-  console.log(currentType);
+  console.log('????', currentType);
   return (
     <Card>
       <span>
@@ -100,20 +116,16 @@ function ItemCard({ id, content, type, changeContent }: ItemCardProps) {
             setCurrentType(e.target.value);
           }}
           value={currentType}>
-          {/* <option value="" selected disabled hidden>
-            {type}
-          </option> */}
-          <option onClick={changeType}>ToDo</option>
-          <option onClick={changeType}>Doing</option>
-          <option onClick={changeType}>Done</option>
+          <option>ToDo</option>
+          <option>Doing</option>
+          <option>Done</option>
         </select>
       </span>
       {isEdit ? (
         <input
           placeholder={content}
           onChange={(e) => {
-            // setText(e.target.value);
-            changeContent(id, e.target.value);
+            setText(e.target.value);
           }}
         />
       ) : (
@@ -124,6 +136,7 @@ function ItemCard({ id, content, type, changeContent }: ItemCardProps) {
           <Button
             onClick={() => {
               setIsEdit(false);
+              editItem();
             }}>
             ok
           </Button>
