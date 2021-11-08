@@ -23,12 +23,12 @@ app.post('/logout', controllers.logout);
 app.get('/user-info', controllers.userinfo);
 app.patch('/user-info', controllers.edituserinfo);
 app.delete('/withdrawal', controllers.withdrawal);
-app.get('todo', controllers.getTodo);
-app.post('todo', controllers.makeTodo);
-// app.patch('todo', controllers.editTodo);
-// app.delete('todo', controllers.deleteTodo);
+app.get('/todo', controllers.getTodo);
+app.post('/todo', controllers.makeTodo);
+app.patch('/todo', controllers.editTodo);
+app.delete('/todo', controllers.deleteTodo);
 
-const HTTPS_PORT = process.env.HTTPS_PORT || 80;
+const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 // if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
 //   const privateKey = fs.readFileSync(__dirname + '/key.pem', 'utf8');
 //   const certificate = fs.readFileSync(__dirname + '/cert.pem', 'utf8');

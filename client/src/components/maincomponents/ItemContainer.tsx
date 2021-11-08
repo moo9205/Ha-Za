@@ -10,7 +10,7 @@ const IC = styled.div`
   overflow: auto;
   /* modified values */
   width: 100%;
-  height: 70vh; 
+  height: 70vh;
   margin: auto 1rem;
   border: 1px solid ${Colors.darkGray};
   border-radius: 5px;
@@ -36,13 +36,17 @@ function ItemContainer({ level, list }: ItemContainerProps) {
       return el.id === id;
     })[0];
     findItem.content = content;
-    console.log('1111111:', findItem);
+    // console.log('1111111:', findItem);
   };
   return (
     <IC>
       <State>{level}</State>
-      {list.length === 0
-        ? 'Please add your To Do List'
+      {list.length === 0 && level === 'ToDo'
+        ? 'Please add your New ToDo List'
+        : list.length === 0 && level === 'Doing'
+        ? 'Please add your Doing List'
+        : list.length === 0 && level === 'Done'
+        ? 'Please add your Done List'
         : list
             .slice(0)
             .reverse()
