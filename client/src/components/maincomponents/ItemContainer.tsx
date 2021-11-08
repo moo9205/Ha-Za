@@ -12,15 +12,17 @@ const IC = styled.div`
   width: 100%;
   height: 70vh;
   margin: auto 1rem;
-  border: 1px solid ${Colors.mediumGray};
+  border: 1px solid ${Colors.darkGray};
+  border-radius: 5px;
   color: ${Colors.mediumGray};
+  background-color: black;
 `;
 
 const State = styled.div`
   font-weight: bold;
   /* font-size: 30px; */
   /* modified values */
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 `;
 
 type ItemContainerProps = {
