@@ -1,6 +1,6 @@
 // import { useEffect } from 'react';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../utils/_var';
 
@@ -106,11 +106,17 @@ function ItemCard({ id, content, type, itemList }: ItemCardProps) {
     content: content
   });
 
+  console.log(item.type);
+
   const handleEditInput =
     (key: string) =>
     (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
       setItem({ ...item, [key]: e.target.value });
     };
+
+  const changeType = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setItem({ ...item, type: e.target.value });
+  };
 
   const editItem = () => {
     if (token) {
@@ -122,6 +128,7 @@ function ItemCard({ id, content, type, itemList }: ItemCardProps) {
         })
         .then((res) => {
           console.log(res);
+          console.log('edited');
           window.location.replace('/');
         })
         .catch((error) => {
@@ -136,6 +143,7 @@ function ItemCard({ id, content, type, itemList }: ItemCardProps) {
       editTodo.type = item.type;
       editTodo.content = item.content;
       sessionStorage.setItem('list', JSON.stringify(list));
+      console.log('edited');
       window.location.replace('/');
     }
   };
@@ -143,27 +151,32 @@ function ItemCard({ id, content, type, itemList }: ItemCardProps) {
   return (
     <Card>
       <span>
-        <Space>{id}</Space>
-        <select
-          onChange={(e) => {
-            handleEditInput('type')(e);
-            editItem();
-          }}
-          value={item.type}>
+        {/* <Space>{id}</Space> */}
+        {isEdit ? (
+          <>
+            <input type="radio" value="ToDo" id="ToDo" name="level" onChange={changeType} />
+            ToDo
+            <input type="radio" value="Doing" id="Doing" name="level" onChange={changeType} />
+            Doing
+            <input type="radio" value="Done" id="Done" name="level" onChange={changeType} />
+            Done
+          </>
+        ) : null}
+        {/* <select onChange={handleEditInput('type')} value={item.type}>
           <option>ToDo</option>
           <option>Doing</option>
           <option>Done</option>
-        </select>
+        </select> */}
       </span>
       {isEdit ? (
-        <input placeholder={content} onChange={handleEditInput('content')} />
+        <input placeholder={content} onChange={handleEditInput('content')} autoFocus />
       ) : (
         <Content>{content}</Content>
       )}
       {isEdit ? (
         <ButtonContainer>
           <Button
-            onClick={(e) => {
+            onClick={() => {
               setIsEdit(false);
               editItem();
             }}>
