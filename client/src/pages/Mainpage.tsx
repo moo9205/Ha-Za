@@ -135,8 +135,8 @@ const Mainpage = (): JSX.Element => {
       }
     }
   }, []);
-
-  const getList = () => {};
+  const [todos, setTodos] = useState({ list });
+  const getList = (id: string) => {};
 
   const handleDrag = (result: DropResult) => {
     if (!result.destination) return;
