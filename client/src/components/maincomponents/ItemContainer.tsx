@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ItemCard from './ItemCard';
 import { Colors } from '../utils/_var';
+import { Draggable } from 'react-beautiful-dnd';
 
 const IC = styled.div`
   border: 1px solid black;
@@ -28,6 +29,7 @@ const State = styled.div`
 type ItemContainerProps = {
   level: string;
   list: { id: number; type: string; content: string }[];
+  ref: any;
 };
 
 function ItemContainer({ level, list }: ItemContainerProps) {
@@ -54,13 +56,20 @@ function ItemContainer({ level, list }: ItemContainerProps) {
             })
             .map((el, key) => {
               return (
-                <ItemCard
-                  id={el.id}
-                  key={key}
-                  content={el.content}
-                  type={el.type}
-                  itemList={list}
-                />
+                <Draggable key={el.id.toString()} draggableId={el.id.toString()} index={key}>
+                  {(provided) => (
+                    <ItemCard
+                      id={el.id}
+                      key={key}
+                      content={el.content}
+                      type={el.type}
+                      itemList={list}
+                      ref={provided.innerRef}
+                      {...provided.dragHandleProps}
+                      {...provided.draggableProps}
+                    />
+                  )}
+                </Draggable>
               );
             })}
     </IC>

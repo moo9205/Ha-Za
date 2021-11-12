@@ -65,6 +65,7 @@ type ItemCardProps = {
   content: string;
   type: string;
   itemList: { id: number; type: string; content: string }[];
+  ref: any;
 };
 
 function ItemCard({ id, content, type, itemList }: ItemCardProps) {

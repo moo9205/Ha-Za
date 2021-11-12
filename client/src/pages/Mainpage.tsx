@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ItemContainer from '../components/maincomponents/ItemContainer';
 import { Colors } from '../components/utils/_var';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, DraggableLocation, Droppable, DropResult } from 'react-beautiful-dnd';
 
 export const MainpageWrapper = styled.div`
   .main {
@@ -35,11 +35,49 @@ const MakeContainer = styled.div`
   margin-left: 4rem;
 `;
 
+interface Item {
+  id: number;
+  type: string;
+  content: string;
+}
+
+interface ItemMoveResult {
+  Todo: Item[];
+  Doing: Item[];
+  Done: Item[];
+}
+
+const reorder = (list: Item[] | [], startIdx: number, endIdx: number): Item[] | [] => {
+  const result = [...list];
+  const [removed] = result.splice(startIdx, 1);
+  result.splice(endIdx, 0, removed);
+  return result;
+};
+
+const move = (
+  source: Item[],
+  destination: Item[],
+  droppableSource: DraggableLocation,
+  droppableDestination: DraggableLocation
+): ItemMoveResult | any => {
+  const sourceClone = [...source];
+  const destClone = [...destination];
+  const [removed] = sourceClone.splice(droppableSource.index, 1);
+
+  destClone.splice(droppableDestination.index, 0, removed);
+
+  const result: any = {};
+
+  result[droppableSource.droppableId] = sourceClone;
+  result[droppableDestination.droppableId] = destClone;
+
+  return result;
+};
 const Mainpage = (): JSX.Element => {
   const level = ['ToDo', 'Doing', 'Done'];
   const [list, setList] = useState<{ id: number; type: string; content: string }[]>([]);
   const listNumber = list.length === 0 ? 1 : list.length + 1;
-  const [item, setItem] = useState({
+  const [item, setItem] = useState<Item>({
     id: listNumber,
     type: 'ToDo',
     content: ''
@@ -98,6 +136,18 @@ const Mainpage = (): JSX.Element => {
     }
   }, []);
 
+  const getList = () => {};
+
+  const handleDrag = (result: DropResult) => {
+    if (!result.destination) return;
+    console.log(result);
+    const items = list;
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setList(items);
+  };
+
   return (
     <MainpageWrapper>
       <div className="main">
@@ -124,11 +174,25 @@ const Mainpage = (): JSX.Element => {
             </>
           ) : null}
         </MakeContainer>
-        <MainContainer>
-          {level.map((el, key) => {
-            return <ItemContainer key={key} level={el} list={list} />;
-          })}
-        </MainContainer>
+        <DragDropContext onDragEnd={handleDrag}>
+          <MainContainer>
+            {level.map((el, key) => {
+              return (
+                <Droppable droppableId={el}>
+                  {(provided) => (
+                    <ItemContainer
+                      key={key}
+                      level={el}
+                      list={list}
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    />
+                  )}
+                </Droppable>
+              );
+            })}
+          </MainContainer>
+        </DragDropContext>
       </div>
     </MainpageWrapper>
   );
